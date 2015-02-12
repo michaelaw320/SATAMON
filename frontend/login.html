@@ -12,25 +12,32 @@
 	</head>
 	<body>
 		
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<h1>Sistem Aduan Taman Online</h1>
-					<img class="center-block" src="img/pemko-bandung.png" style="max-width: 200px;">
-					<p>Anda akan mengakses halaman pihak berwenang dari Sistem Aduan Taman Online Pemerintah Kota Bandung.</p>
-				</div>
-				<div class="col-md-6">
-					<form>
-						<div class="form-group">
-							<label for="loginUsername">Nama pengguna</label>
-							<input type="username" class="form-control" id="loginUsername" placeholder="Nama pengguna">
+		<div class="box">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="box-left col-md-6">
+						<h2>SATAMON<br><small>Sistem Aduan Taman Online</small></h2>
+						<p>Anda akan mengakses halaman pihak berwenang dari <strong>Sistem Aduan Taman Online Pemerintah Kota Bandung</strong>.</p>
+						<p>Silahkan masukkan <strong>nama pengguna</strong> dan <strong>kata sandi</strong> untuk dapat mengakses halaman pihak berwenang yang tersedia.</p>
+						<hr>
+						<p class="copyright"><img class="logo-pemko" src="img/pemko-bandung.png"></p>
+						<p class="copyright text-muted">&copy; 2015 Pemerintah Kota Bandung</p>
+					</div>
+					<div class="box-right col-md-6">
+						<div id="loginMessage">
 						</div>
-						<div class="form-group">
-							<label for="loginPassword">Kata sandi</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Kata sandi">
-						</div>
-						<button type="submit" class="btn btn-default">Masuk</button>
-					</form>
+						<form>
+							<div class="form-group">
+								<label for="username">Nama pengguna</label>
+								<input type="text" class="form-control" id="loginUsername" name="username" placeholder="Nama pengguna">
+							</div>
+							<div class="form-group">
+								<label for="password">Kata kunci</label>
+								<input type="password" class="form-control" id="loginPassword" name="password" placeholder="Kata kunci">
+							</div>
+							<button type="submit" class="btn btn-primary">Masuk</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
