@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Sistem Aduan Taman Online Kota Bandung - Laporkan!</title>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -11,12 +11,48 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/bootstrap-select.css" rel="stylesheet">
+	<link href="css/screen.css" rel="stylesheet">
   
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="js/bootstrap-select.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.js"></script>
+	<script>
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("submitted!");
+		}
+	});
+
+	$().ready(function() {
+		// validate the comment form when it is submitted
+		$("#aduan").validate();
+
+		// propose username by combining first- and lastname
+		$("#username").focus(function() {
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			if (firstname && lastname && !this.value) {
+				this.value = firstname + "." + lastname;
+			}
+		});
+
+		//code to hide topic selection, disable for demo
+		var newsletter = $("#newsletter");
+		// newsletter topics are optional, hide at first
+		var inital = newsletter.is(":checked");
+		var topics = $("#newsletter_topics")[inital ? "removeClass" : "addClass"]("gray");
+		var topicInputs = topics.find("input").attr("disabled", !inital);
+		// show when newsletter is checked
+		newsletter.click(function() {
+			topics[this.checked ? "removeClass" : "addClass"]("gray");
+			topicInputs.attr("disabled", !this.checked);
+		});
+	});
+	</script>
 	
+	<title>Sistem Aduan Taman Online Kota Bandung - Laporkan!</title>
 </head>
 
 <body>
@@ -73,27 +109,20 @@
 				</div> <a class="left carousel-control" href="#carousel-621411" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-621411" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 			-->
-			<form role="form">
+			<form role="form" class="cmxform" id="aduan">
 				<div class="form-group">
 					 <label for="inputEmail">Alamat E-mail</label><input class="form-control" id="inputEmail1" type="email">
-				</div>
-				<div class="form-group">
 					 <label for="inputTaman">Nama taman</label><input class="form-control" id="inputTaman1" type="text" required>
-				</div>
-				<div class="form-group">
 					 <label for="inputReport">Isi pengaduan</label><input class="form-control" id="inputReport1" type="text" required>
-				</div>
-				<div class="form-group">
 					<label for="inputSelection">Pilih kategori</label><br>
 					<select id="inputSelection1" required>
 						<option value="" selected="selected" disabled="disabled">Pilih kategori</option>
 						<option value="A">A</option>
 						<option value="B">B</option>
 					</select>
-				</div>
-				<div class="form-group">
-					 <label for="exampleInputFile">Upload foto</label>
-					 <input id="exampleInputFile" type="file" required>
+					<br>
+					 <label for="inputFile">Upload foto</label>
+					 <input id="inputFile1" type="file" required>
 				</div>
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
