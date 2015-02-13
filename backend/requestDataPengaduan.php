@@ -11,4 +11,11 @@
  *		return hasil retrieval kepada client
  */
 
+if(session_status() == PHP_SESSION_NONE) {
+	/* Not Authenticated */
+	
+} else {
+	/* Process Request */
+}
+
 ?>
