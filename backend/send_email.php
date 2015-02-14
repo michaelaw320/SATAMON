@@ -1,7 +1,12 @@
 <?php
 	require 'phpmailer/class.phpmailer.php';
 	
-	sendMailTo("13512018@std.stei.itb.ac.id","Pasopati",0);
+	/* Contoh penggunaan fungsi sendMailTo ke Admin sbg Laporan  Harian*/
+	//$tam = array('pasopati','pasopati','pret','pret','pasopati','dung');
+	//sendMailTo("13512018@std.stei.itb.ac.id",$tam,0);
+	
+	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Pengaduan  */
+	sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',1);
 	
 	//$status = 0 -> ke admin
 	//$status = 1 -> ke user
@@ -55,6 +60,7 @@
 		else
 			return 'Error';
 	}
+	
 	function sendMailTo($mailAddress,$taman,$status)
 	{
 		date_default_timezone_set("Asia/Jakarta");
@@ -64,9 +70,7 @@
 		$tanggal = date("j");
 		$bulan = konversi_bulan(date("F"));
 		$tahun = date("Y");
-		$jam = date("H:i:s");
-		$jamtanggal = $hari . ", " . $tanggal . " ". $bulan . " " . $tahun . ", " . $jam;
-		echo($jamtanggal);
+		$time = $hari . ", " . $tanggal . " ". $bulan . " " . $tahun;
 		
 		if ($hour >= 0 && $hour <= 11)
 			$waktu = "pagi";
@@ -96,19 +100,49 @@
 
 		$mail->addAddress($mailAddress);
 		
-		if ($status == 0)
+		if ($status == 0) // admin
 		{
-			$mail->Subject = "[Satamon Bandung] [Laporan Harian]";
+			$mail->Subject = "[Satamon Bandung] [Laporan Harian] "."[".$time."]";
+			$all_taman = array();
+			$total_laporan = count($taman);
 			
+			foreach($taman as &$t)
+			{
+				if (array_key_exists($t,$all_taman))
+				{
+					$all_taman[$t]++;
+				}
+				else
+				{
+					$all_taman[$t] = 1;
+				}
+			}
+			$body = 
+			'
+				<table border = "1"> 
+					<tr>
+						<td> Nama Taman </td>
+						<td> Jumlah Laporan </td>
+						<td> Persentase(%)	</td>
+					</tr>
+			';
+			
+			foreach ($all_taman as $tmn=>$jmlh)
+			{
+				$body .= '<tr> <td>' . $tmn . '</td> <td>' . $jmlh . '</td> <td> '. round(($jmlh/$total_laporan)*100,2) .'</td></tr>';
+			}
+			
+			$body .= '<tr><td> Total Laporan </td> <td>'.$total_laporan.'</td> <td>100</td></tr></table>';
+			$mail->Body = $body;
 		}
-		else
+		else // masyarakat
 		{
 			$mail->Subject = "[Satamon Bandung] [Notifikasi Pengaduan]";
 			$mail->Body = 
 			"Selamat " .$waktu. ". <br /> <br/>
+			Terima kasih atas partisipasi Anda. <br/>
 			Anda telah melaporkan Taman ".$taman. " ke Satamon Bandung. <br/>
-			Pengaduan anda akan kami proses segera. <br/> <br/>
-			Terima kasih.<br/> <br/>
+			Pengaduan Anda akan kami proses segera. <br/> <br/> <br/> <br/>
 			-Tim Satamon Bandung-";
 		}
 		return ($mail->Send());
