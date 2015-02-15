@@ -10,35 +10,32 @@
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/bootstrap-select.css" rel="stylesheet">
+	<link href="css/jquery.autocomplete.css" rel="stylesheet">
   
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="js/bootstrap-select.js"></script>
+	<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#inputTaman1").autocomplete("autocomplete.php", {
+			selectFirst: true
+		});
+	});
+	</script>
 	
 	<title>Sistem Aduan Taman Online Kota Bandung - Laporkan!</title>
 </head>
 
 <body>
-<?php
-// post_add.php
-date_default_timezone_set('Asia/Jakarta');
-if(!empty($_POST)) {
-	include 'mysql.php';
-	if(!mysql_safe_query('INSERT INTO pengaduan (email_pengaduan,isi_pengaduan,jenis_pengaduan,id_taman) VALUES (%s,%s,%s,%d)', $_POST['inputEmail1'], $_POST['inputReport1'], $_POST['inputSelection1'], 1))
-		echo mysql_error();
-	else
-		redirect('index.php');
-}
-?>
-
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<h3 class="text-center"><b>
 				<img src="/SATAMON/frontend/img/satamon.png" height="360" width="360"></img>
 			</b></h3>
-			<form role="form" class="cmxform" id="aduan" method="post" action="">
+			<form role="form" class="cmxform" id="aduan" method="post" action="submitaduan.php">
 				<div class="form-group">
 					 <label for="inputEmail">Alamat E-mail</label><input class="form-control" name="inputEmail1" id="inputEmail1" type="email">
 					 <label for="inputTaman">Nama taman</label><input class="form-control" name="inputTaman1" id="inputTaman1" type="text" required>
@@ -53,7 +50,7 @@ if(!empty($_POST)) {
 					</select>
 					<br>
 					 <label for="inputFile">Upload foto</label>
-					 <input id="inputFile1" type="file" required>
+					 <input id="inputFile1" name="inputFile1" type="file" required>
 				</div>
 				<input type="submit" name="submit" class="btn btn-default">
 			</form>
