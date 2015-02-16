@@ -35,7 +35,7 @@
 			<h3 class="text-center"><b>
 				<img src="/SATAMON/frontend/img/satamon.png" height="360" width="360"></img>
 			</b></h3>
-			<form role="form" class="cmxform" id="aduan" method="post" action="submitaduan.php">
+			<form role="form" class="cmxform" enctype="multipart/form-data" id="aduan" method="post" action="submitaduan.php">
 				<div class="form-group">
 					 <label for="inputEmail">Alamat E-mail</label><input class="form-control" name="inputEmail1" id="inputEmail1" type="email">
 					 <label for="inputTaman">Nama taman</label><input class="form-control" name="inputTaman1" id="inputTaman1" type="text" required>
@@ -52,7 +52,7 @@
 					 <label for="inputFile">Upload foto</label>
 					 <input id="inputFile1" name="inputFile1" type="file" required>
 				</div>
-				<input type="submit" name="submit" class="btn btn-default">
+				<input type="submit" id="submit" value="submit" name="submit" class="btn btn-default">
 			</form>
 		</div>
 	</div>
