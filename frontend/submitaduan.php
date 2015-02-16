@@ -37,11 +37,11 @@ if(isset($_POST['submit'])){
 	
 	$id_pengaduan = mysql_insert_id();
 	$query = "INSERT INTO foto(id_pengaduan,nama_foto,url_foto,jenis_foto,ukuran_foto) VALUES (".$id_pengaduan.",\"".$name."\",\"".$url_foto."\",\"".$detectedType."\",".$detectedSize.")";
-	echo "<br>".$query."<br>";
+
 	if(!mysql_safe_query($query))
 		echo mysql_error();
 	
-	
+	redirect('index.php');
 }
 
 ?>
