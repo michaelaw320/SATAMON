@@ -33,7 +33,7 @@
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<h3 class="text-center"><b>
-				<img src="/SATAMON/frontend/img/satamon.png" height="360" width="360"></img>
+				<img src="img/satamon.png" height="360" width="360"></img>
 			</b></h3>
 			<form role="form" class="cmxform" enctype="multipart/form-data" id="aduan" method="post" action="submitaduan.php">
 				<div class="form-group">

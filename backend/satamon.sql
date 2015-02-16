@@ -68,6 +68,11 @@ INSERT INTO `pengaduan` (`id_pengaduan`, `email_pengaduan`, `isi_pengaduan`, `je
 (279, 'NULL', 'hehe2x', 'sampah', 'diterima', '2015-02-16 14:27:09', 3),
 (280, 'NULL', 'hehe2x', 'sampah', 'diterima', '2015-02-16 15:01:13', 3);
 
+INSERT INTO `pengaduan` (`id_pengaduan`, `email_pengaduan`, `isi_pengaduan`, `jenis_pengaduan`, `status_pengaduan`, `waktu_pengaduan`, `id_taman`) VALUES
+(41, 'akwlfej@kwgj.jgawkl', 'ksjfklefjlkjfio', 'sampah', 'diterima', '0000-00-00 00:00:00', 1),
+(42, 'bababa@babuba.ba', 'nanaonan', 'kriminal', 'diterima', '0000-00-00 00:00:00', 3),
+(43, 'lieur@sekali.hihi', 'nyebelin maneh', 'sampah', 'diterima', '0000-00-00 00:00:00', 8);
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +94,16 @@ INSERT INTO `taman` (`id_taman`, `nama_taman`, `latitude_taman`, `longitude_tama
 (1, 'Taman A', 100, 100),
 (2, 'Taman B', 150, 150),
 (3, 'Taman C', 200, 200);
+
+INSERT INTO `taman` (`id_taman`, `nama_taman`, `latitude_taman`, `longitude_taman`) VALUES
+(4, 'Taman Jomblo', 100, 100000000),
+(5, 'Taman Fitness', 0.5, 6.38989),
+(6, 'Taman Lansia', 9.9219, 29.9283),
+(7, 'Taman Film', 7.92383, 9.29329),
+(8, 'Taman Foto', 0.298929, 39.2923),
+(9, 'Taman Kandaga Puspa', 9.92483, 9.92383),
+(10, 'Taman Superhero', 3294.92, 39.2935),
+(11, 'Taman Musik Centrum', 984.932, 9348.39);
 
 --
 -- Indexes for dumped tables
