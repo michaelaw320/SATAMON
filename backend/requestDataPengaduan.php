@@ -6,7 +6,7 @@
  *	Output:
  *		JSON
  *		Not Authenticated JSON: {'LoginStatus'=>"NOT_AUTHENTICATED"}
- *		Content: TBD
+ *		Content: Hasil query mysql
  *	Process:
  *		Query database untuk laporan dan foto sesuai dengan ketentuan
  *		return hasil retrieval kepada client
@@ -34,7 +34,7 @@ if(session_status() == PHP_SESSION_NONE) {
 			$result[] = $data;
 		}
 		
-		$data = array("result" => 0, "data" => $result);
+		$data = array("result" => count($result), "data" => $result);
 		
 		mysqli_close($conn);
 		/* JSON Response */
