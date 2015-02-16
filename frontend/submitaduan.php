@@ -9,21 +9,19 @@ if(isset($_POST['submit'])){
 	$id_taman = mysql_fetch_row(mysql_safe_query($query));
 	if(!mysql_safe_query('INSERT INTO pengaduan (email_pengaduan,isi_pengaduan,jenis_pengaduan,id_taman) VALUES (%s,%s,%s,%d)', $email, $_POST['inputReport1'], $_POST['inputSelection1'], $id_taman[0]))
 		echo mysql_error();
-	
-	if(!empty($_POST['inputFile1'])) {
-		$name       = $_FILES['inputFile1']['name'];  
-		$temp_name  = $_FILES['inputFile1']['tmp_name'];  
-		if(isset($name)){
-			if(!empty($name)){      
-				$location = '../backend/uploads/';      
-				if(move_uploaded_file($temp_name, $location.$name)){
-					echo 'uploaded';
-				}
-			}       
-		}  else {
-			echo 'please uploaded';
-		}
-	}
+
+    $name       = $_FILES['inputFile1']['name'];  
+    $temp_name  = $_FILES['inputFile1']['tmp_name'];  
+    if(isset($name)){
+        if(!empty($name)){      
+            $location = '../backend/uploads/';      
+            if(move_uploaded_file($temp_name, $location.$name)){
+                echo 'uploaded';
+            }
+        }       
+    }  else {
+        echo 'please uploaded';
+    }
 	redirect('index.php');
 }
 
