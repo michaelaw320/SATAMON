@@ -1,7 +1,7 @@
 <?php
 	require 'admin_auth.php';
-	$id = 'home';
-	$name = 'Beranda';
+	$id = 'laporan_pengaduan';
+	$name = 'Laporan Pengaduan';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -20,7 +20,7 @@
 			include 'templates/admin_navbar.php';
 		?>
 		
-		<h1>Beranda!</h1>
+		<h1>Laporan Pengaduan!</h1>
 		
 		<?php
 			$foot['js'] = array(
