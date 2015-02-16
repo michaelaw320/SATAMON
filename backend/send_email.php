@@ -6,10 +6,14 @@
 	//sendMailTo("13512018@std.stei.itb.ac.id",$tam,0);
 	
 	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Pengaduan  */
-	sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',1);
+	//sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',1);
+	
+	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Perubahan Status Pengaduan */
+	sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',2);
 	
 	//$status = 0 -> ke admin
-	//$status = 1 -> ke user
+	//$status = 1 -> ke user, bentuk notif awal untuk pengaduan
+	//$status = 2 -> ke user, bentuk notif bila pengaduan sudah dirubah statusnya ke "telah diproses"
 	
 	function konversi_hari($day)
 	{
@@ -135,7 +139,7 @@
 			$body .= '<tr><td> Total Laporan </td> <td>'.$total_laporan.'</td> <td>100</td></tr></table>';
 			$mail->Body = $body;
 		}
-		else // masyarakat
+		else if ($status == 1) // masyarakat - notifikasi pengaduan awal
 		{
 			$mail->Subject = "[Satamon Bandung] [Notifikasi Pengaduan]";
 			$mail->Body = 
@@ -143,7 +147,21 @@
 			Terima kasih atas partisipasi Anda. <br/>
 			Anda telah melaporkan Taman ".$taman. " ke Satamon Bandung. <br/>
 			Pengaduan Anda akan kami proses segera. <br/> <br/> <br/> <br/>
+			<br/>
 			-Tim Satamon Bandung-";
+		}
+		else if ($status == 2) // masyarakat - notifikasi perubahan status pengaduan
+		{
+			$mail->Subject = "[Satamon Bandung] [Notifikasi Pengaduan]";
+			$mail->Body = 
+			"Selamat " .$waktu. ". <br/> <br/>
+			Laporan anda pada Taman ".$taman." sudah kami proses. <br/>
+			Terimakasih sudah melaporkannya kepada kami. <br/>
+			Semoga anda tetap berpartisipasi aktif dalam menjaga taman-taman di kota Bandung. <br/>
+			Jangan segan-segan untuk segera melaporkan kembali ke Satamon Bandung bila Anda menemukan Taman yang bermasalah. <br/> <br/> <br/> <br/>
+			Regards, <br/>
+			-Tim Satamon Bandung-
+			";
 		}
 		return ($mail->Send());
 	}
