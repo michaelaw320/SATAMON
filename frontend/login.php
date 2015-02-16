@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>SATAMON - Login Pihak Berwenang</title>
-
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/login.css">
-		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,700,700italic">
+		<?php
+			$head['title'] = 'SATAMON - Pihak Berwenang: Login';
+			$head['css'] = array(
+				'login'
+			);
+			include 'templates/head.php';
+		?>
 	</head>
 	<body>
 		
@@ -28,7 +26,7 @@
 						<h2>Masuk</h2>
 						<div id="loginResponse">
 						</div>
-						<form id="loginForm" action="auth.php" method="post">
+						<form id="loginForm" action="../backend/auth.php" method="post">
 							<div class="form-group">
 								<label for="username">Nama pengguna</label>
 								<input type="text" class="form-control" id="loginUsername" name="username" placeholder="Nama pengguna" required autofocus>
@@ -44,8 +42,11 @@
 			</div>
 		</div>
 		
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/login.js"></script>
+		<?php
+			$foot['js'] = array(
+				'login'
+			);
+			include 'templates/foot.php';
+		?>
 	</body>
 </html>

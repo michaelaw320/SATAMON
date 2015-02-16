@@ -23,6 +23,7 @@ $password = $_POST['password'];
 if($username == $admin_username && $password == $admin_password) {
 	//stub for success login
 	session_start();
+	$_SESSION['username'] = $admin_username;
 	$data = array('LoginStatus'=>"SUCCESS");
 	$send = json_encode($data);
 	header('Content-Type: application/json');
