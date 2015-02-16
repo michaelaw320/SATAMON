@@ -18,6 +18,6 @@ function redirect($uri) {
     exit;
 }
 
-mysql_connect('127.0.0.1','blogAdmin','nomoreloseplox2');
-mysql_select_db('satamon');
+mysql_connect('localhost','root','') or die("gak bisa konek localhost");
+mysql_select_db('satamon') or die("gak bisa konek ke satamon");
 ?>

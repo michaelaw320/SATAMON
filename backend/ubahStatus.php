@@ -19,13 +19,13 @@ require 'MYSQL_CREDENTIALS.php';
 
 //TODO Masukin fungsi mailer kesini
 
-if(session_status() == PHP_SESSION_NONE) {
-	/* Not Authenticated */
+/*if(session_status() == PHP_SESSION_NONE) {
+	// Not Authenticated
 	$data = array('LoginStatus'=>"NOT_AUTHENTICATED");
 	$send = json_encode($data);
 	header('Content-Type: application/json');
 	echo $send;
-} else {
+} else {*/
 	/* Process Request */
 	$conn = mysqli_connect(MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DBNAME);
 	if (!$conn) {
@@ -52,5 +52,5 @@ if(session_status() == PHP_SESSION_NONE) {
 		header('Content-type: application/json');
 		echo json_encode($data);
 	}
-}
+//}
 ?>

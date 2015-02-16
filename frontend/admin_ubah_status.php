@@ -31,7 +31,7 @@
 			}
 			else{
 		?>
-				<form ACTION="" METHOD="POST">
+				<form ACTION="../backend/ubahStatus.php" METHOD="POST">
 					<div class="table-responsive">
 						<table class="table table-striped table-hover">
 							<tr>
@@ -68,7 +68,7 @@
 									}
 									echo("
 										<tr>
-											<td><input type=checkbox name=statusdiubah[] id=statusdiubah[] value=$row->id_pengaduan></td>
+											<td><input type=checkbox name=key id=key value=$row->id_pengaduan></td>
 											<td>$no</td>
 											<td>$id_pengaduan</td>
 											<td>$nama_taman</td>
@@ -87,11 +87,10 @@
 					<p class="text-center">
 						Jumlah total pengaduan: <?php echo "$isIsi"; ?>
 						<br><br>
-						<select id="prosesubahstatus" name="prosesubahstatus">
+						<select id="value" name="value">
 							<option selected>Lakukan aksi terhadap pengaduan</option>
 							<option value="sedang_diproses">Ubah status menjadi sedang diproses</option>
 							<option value="sudah_diproses">Ubah status menjadi sudah diproses</option>
-							<option value="sudah_difollowup">Ubah status menjadi sudah difollow up</option>
 						</select>
 						<button class="btn btn-default" type="submit" name="Kirim" value="Kirim">Konfirm Aksi</button>
 					</p>
