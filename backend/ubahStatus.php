@@ -17,7 +17,7 @@
 
 require 'MYSQL_CREDENTIALS.php';
 
-//TODO Masukin fungsi mailer kesini
+include 'send_email.php';
 
 /*if(session_status() == PHP_SESSION_NONE) {
 	// Not Authenticated
@@ -38,12 +38,25 @@ require 'MYSQL_CREDENTIALS.php';
 		foreach($data as $key => $value) {
 			//$key as id laporan
 			//$value itu status laporan
-			//TODO email ke masyarakat yang status pengaduannya diubah, tony modules go here
-			// algoritma kasar mailer, query ke basisdata ambil email yang sesuai dengan id nya	
-			// hati hati penanganan email NULL	
 			$value = "'". $value. "'";
 			$sql = "UPDATE `pengaduan` SET status_pengaduan=$value WHERE id_pengaduan=$key";
 			$update = mysqli_query($conn, $sql);
+			
+			$sql2 = "SELECT email_pengaduan,id_taman FROM `pengaduan` WHERE id_pengaduan=$key";
+			$result = mysqli_query($conn, $sql2);
+			$row = mysqli_fetch_assoc($result);
+			$email_pengaduan = $row["email_pengaduan"];
+			
+			$id_taman = $row["id_taman"];
+			$sql3 = "SELECT nama_taman FROM `taman` WHERE id_taman=$id_taman";
+			$result3 = mysqli_query($conn, $sql3);
+			$row3 = mysqli_fetch_assoc($result3);
+			$nama_taman = $row3["nama_taman"];
+			
+			if($email_pengaduan != "NULL") {
+				sendMailTo($email_pengaduan,$nama_taman,2);
+			}
+			
 		}
 
 		mysqli_close($conn);

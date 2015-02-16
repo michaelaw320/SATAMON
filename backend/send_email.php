@@ -9,7 +9,7 @@
 	//sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',1);
 	
 	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Perubahan Status Pengaduan */
-	sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',2);
+	//sendMailTo("13512046@std.stei.itb.ac.id",'pasopati',2);
 	
 	//$status = 0 -> ke admin
 	//$status = 1 -> ke user, bentuk notif awal untuk pengaduan
@@ -155,7 +155,7 @@
 			$mail->Subject = "[Satamon Bandung] [Notifikasi Pengaduan]";
 			$mail->Body = 
 			"Selamat " .$waktu. ". <br/> <br/>
-			Laporan anda pada Taman ".$taman." sudah kami proses. <br/>
+			Laporan anda pada ".$taman." sudah kami proses. <br/>
 			Terimakasih sudah melaporkannya kepada kami. <br/>
 			Semoga anda tetap berpartisipasi aktif dalam menjaga taman-taman di kota Bandung. <br/>
 			Jangan segan-segan untuk segera melaporkan kembali ke Satamon Bandung bila Anda menemukan Taman yang bermasalah. <br/> <br/> <br/> <br/>
