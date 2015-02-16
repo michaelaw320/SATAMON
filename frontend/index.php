@@ -50,7 +50,7 @@
 					</select>
 					<br>
 					 <label for="inputFile">Upload foto</label>
-					 <input id="inputFile1" name="inputFile1" type="file" required>
+					 <input id="inputFile1" name="inputFile1" type="file"  accept="image/gif,image/jpeg,image/png,image/gif">
 				</div>
 				<input type="submit" id="submit" value="submit" name="submit" class="btn btn-default">
 			</form>
