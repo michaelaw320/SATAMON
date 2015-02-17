@@ -1,19 +1,26 @@
 <?php
 	require 'phpmailer/class.phpmailer.php';
 	
+	$tam_ = array
+	(	
+		array ('Pasopati','Kriminal'),
+		array ('Pasopati','Misc'),
+		array ('Jomblo','Kriminal')
+	);
 	/* Contoh penggunaan fungsi sendMailTo ke Admin sbg Laporan  Harian*/
 	//$tam = array('pasopati','pasopati','pret','pret','pasopati','dung');
-	//sendMailTo("13512018@std.stei.itb.ac.id",$tam,0);
+	sendMailTo("13512018@std.stei.itb.ac.id",$tam_,0);
 	
 	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Pengaduan  */
 	//sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',1);
 	
 	/* Contoh penggunaan fungsi sendMailTo ke Masyarakat sbg Notifikasi Perubahan Status Pengaduan */
-	//sendMailTo("13512046@std.stei.itb.ac.id",'pasopati',2);
+	//sendMailTo("13512018@std.stei.itb.ac.id",'pasopati',2);
 	
 	//$status = 0 -> ke admin
 	//$status = 1 -> ke user, bentuk notif awal untuk pengaduan
 	//$status = 2 -> ke user, bentuk notif bila pengaduan sudah dirubah statusnya ke "telah diproses"
+	
 	
 	function konversi_hari($day)
 	{
@@ -107,36 +114,95 @@
 		if ($status == 0) // admin
 		{
 			$mail->Subject = "[Satamon Bandung] [Laporan Harian] "."[".$time."]";
-			$all_taman = array();
+		
+			$all_taman = array
+			(
+				array('Pasopati','Kriminal',0),
+				array('Pasopati','Sampah',0),
+				array('Pasopati','Sarana',0),
+				array('Pasopati','Misc',0),
+				
+				array('Jomblo','Kriminal',0),
+				array('Jomblo','Sampah',0),
+				array('Jomblo','Sarana',0),
+				array('Jomblo','Misc',0),
+				
+				array('Kota','Kriminal',0),
+				array('Kota','Sampah',0),
+				array('Kota','Sarana',0),
+				array('Kota','Misc',0)
+			);
+			
 			$total_laporan = count($taman);
 			
-			foreach($taman as &$t)
+			foreach($taman as $tmn)
 			{
-				if (array_key_exists($t,$all_taman))
+				foreach ($all_taman as &$tam)
 				{
-					$all_taman[$t]++;
-				}
-				else
-				{
-					$all_taman[$t] = 1;
+					if (($tam[0] == $tmn[0]) && ($tam[1] == $tmn[1]))
+					{
+						$tam[2]++;
+						
+					}
+					else
+					{
+						// inputan asumsikan benar
+					}
 				}
 			}
+			
 			$body = 
 			'
 				<table border = "1"> 
 					<tr>
-						<td> Nama Taman </td>
-						<td> Jumlah Laporan </td>
-						<td> Persentase(%)	</td>
+						<td rowspan="2"> Nama Taman </td>
+						<td colspan="4"> Kategori</td>
+						<td rowspan="2"> Jumlah Laporan </td>
+					</tr>
+					<tr>
+						<td> Kriminal </td>
+						<td> Sampah </td>
+						<td> Sarana </td>
+						<td> Misc </td>
 					</tr>
 			';
+			$i = 0;
+			$counter = 0;
+			$kategori = array
+			(
+				'Kriminal' => 0,
+				'Sampah' => 0,
+				'Sarana' => 0,
+				'Misc' => 0
+			);
 			
-			foreach ($all_taman as $tmn=>$jmlh)
+			foreach ($all_taman as &$tm)
 			{
-				$body .= '<tr> <td>' . $tmn . '</td> <td>' . $jmlh . '</td> <td> '. round(($jmlh/$total_laporan)*100,2) .'</td></tr>';
+				if ($i % 4 == 0)
+				{
+					$body .= '<tr> <td>' .$tm[0] . '</td>';
+				}
+				$body.='<td>' . $tm[2] .'</td>';
+				$counter = $counter + $tm[2];
+				
+				if ($tm[2] > 0)
+					$kategori[$tm[1]]++;
+				
+				if (($i+1) % 4 == 0)
+				{
+					$body.='<td>' . $counter . '</td> </tr>';
+					$counter = 0;
+				}
+				$i++;
 			}
 			
-			$body .= '<tr><td> Total Laporan </td> <td>'.$total_laporan.'</td> <td>100</td></tr></table>';
+			$body .= '<tr> <td> Jumlah Laporan </td>';
+			foreach ($kategori as &$kat)
+			{
+				$body.='<td>'. $kat.'</td>';
+			}
+			$body.= '<td>'.$total_laporan.'</td> </tr>';
+			echo $body;
 			$mail->Body = $body;
 		}
 		else if ($status == 1) // masyarakat - notifikasi pengaduan awal
@@ -155,7 +221,7 @@
 			$mail->Subject = "[Satamon Bandung] [Notifikasi Pengaduan]";
 			$mail->Body = 
 			"Selamat " .$waktu. ". <br/> <br/>
-			Laporan anda pada ".$taman." sudah kami proses. <br/>
+			Laporan anda pada Taman ".$taman." sudah kami proses. <br/>
 			Terimakasih sudah melaporkannya kepada kami. <br/>
 			Semoga anda tetap berpartisipasi aktif dalam menjaga taman-taman di kota Bandung. <br/>
 			Jangan segan-segan untuk segera melaporkan kembali ke Satamon Bandung bila Anda menemukan Taman yang bermasalah. <br/> <br/> <br/> <br/>
