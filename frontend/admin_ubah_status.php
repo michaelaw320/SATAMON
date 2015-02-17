@@ -98,6 +98,8 @@
 			<?php
 			}
 		?>
+		
+		
 
 		<?php
 			$foot['js'] = array(
