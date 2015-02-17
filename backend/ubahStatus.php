@@ -32,9 +32,11 @@ include 'send_email.php';
 		die("Connection failed: " . mysqli_connect_error());
 	} else {
 		/* Connection Successful */
-		$json = file_get_contents('php://input');
+		/*$json = file_get_contents('php://input');
+		var_dump($json);
 		$data = json_decode($json,true);
-		
+		var_dump($data);
+
 		foreach($data as $key => $value) {
 			//$key as id laporan
 			//$value itu status laporan
@@ -51,14 +53,32 @@ include 'send_email.php';
 			if($email_pengaduan != "NULL") {
 				sendMailTo($email_pengaduan,$nama_taman,2);
 			}
-			
-		}
+		}*/
+		if(isset($_POST['Kirim'])){
+			if(isset($_POST['key']) && isset($_POST['proses'])){
+				if(($_POST['key'] != "") || ($_POST['proses'] != "")){
+					$key = $_POST['key'];
+					$proses = $_POST['proses'];
+					for($i = 0; $i < sizeof($key); $i++){
+						$sql = "UPDATE `pengaduan` SET status_pengaduan='$proses' WHERE id_pengaduan=$key[$i]";
+						$update = mysqli_query($conn, $sql);
+					}
 
-		mysqli_close($conn);
+					mysqli_close($conn);
+					header("location:../frontend/admin_ubah_status.php");
+				}
+				else{
+					echo "Masih ada form yang masih kosongg";
+				}
+			}
+			else{
+				echo "Masih ada form yang masih kosong";
+			}
+		}
 		/* JSON Response */
-		$data = array("result" => "DONE");
+		/*$data = array("result" => "DONE");
 		header('Content-type: application/json');
-		echo json_encode($data);
+		echo json_encode($data);*/
 	}
 //}
 ?>
