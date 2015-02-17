@@ -73,7 +73,14 @@
 											<td>$id_pengaduan</td>
 											<td>$nama_taman</td>
 											<td>$email_pengaduan</td>
-											<td><img src=$foto class=img-responsive></td>
+									");
+									if($foto != NULL){
+										echo ("<td><img src=$foto class=img-responsive></td>");
+									}
+									else{
+										echo("<td>Pengadu tidak mengunggah foto</td>");
+									}
+									echo("
 											<td>$isi_pengaduan</td>
 											<td>$waktu_pengaduan</td>
 											<td>$status_pengaduan</td>

@@ -62,6 +62,16 @@ include 'send_email.php';
 					for($i = 0; $i < sizeof($key); $i++){
 						$sql = "UPDATE `pengaduan` SET status_pengaduan='$proses' WHERE id_pengaduan=$key[$i]";
 						$update = mysqli_query($conn, $sql);
+
+						$sql2 = "SELECT email_pengaduan,nama_taman FROM pengaduan NATURAL JOIN taman WHERE id_pengaduan=$key[$i]";
+						$result = mysqli_query($conn, $sql2);
+						$row = mysqli_fetch_assoc($result);
+						$email_pengaduan = $row["email_pengaduan"];
+						$nama_taman = $row["nama_taman"];
+		
+						if($email_pengaduan != "NULL") {
+							sendMailTo($email_pengaduan,$nama_taman,2);
+						}
 					}
 
 					mysqli_close($conn);
