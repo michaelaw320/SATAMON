@@ -47,7 +47,7 @@ $( document ).ready(function() {
 				// URL redirect
 				var redir = getParameter("r");
 				if (redir === false) {
-					redir = "admin_home.php";
+					redir = "admin_ubah_status.php";
 				}
 				location.assign( redir );
 				

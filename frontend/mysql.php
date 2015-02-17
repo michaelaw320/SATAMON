@@ -18,6 +18,6 @@ function redirect($uri) {
     exit;
 }
 
-mysql_connect('localhost','root','') or die("gak bisa konek localhost");
+mysql_connect('localhost','','') or die("gak bisa konek localhost");
 mysql_select_db('satamon') or die("gak bisa konek ke satamon");
 ?>

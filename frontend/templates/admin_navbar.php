@@ -1,9 +1,6 @@
 <?php
 	$admin_navbar['navbar'] = array(
-		"home" => "Beranda",
-		"ubah_status" => "Ubah Status",
-		"daftar_pengaduan" => "Daftar Pengaduan",
-		"laporan_pengaduan" => "Laporan Pengaduan"
+		"ubah_status" => "Ubah Status"
 	);
 ?>
 <nav class="navbar navbar-static-top navbar-inverse">
@@ -15,7 +12,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="admin_home.php">SATAMON</a>
+			<a class="navbar-brand" href="#">SATAMON</a>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="adminNavbar">
@@ -27,7 +24,7 @@
 				<?php } ?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../backend/logout.php">Keluar</a></li>
+				<li><a class="btn btn-default navbar-btn" href="../backend/logout.php">Keluar</a></li>
 			</ul>
 		</div>
 	</div>
